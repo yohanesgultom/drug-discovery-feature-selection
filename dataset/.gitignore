@@ -1,0 +1,5 @@
+*
+!.gitignore
+!dataset.tar.gz
+!daftar-senyawa-beserta-binding-energy.csv
+

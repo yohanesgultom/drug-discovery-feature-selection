@@ -149,11 +149,7 @@
 % in the abstract
 \begin{abstract}
 
-This research evaluates feature selection methods to reduce number of features required to predict docking result between Indonesian medicinal plant compounds and HIV protease.  
-
-Two feature selection methods on public dataset from PubChem Bioassay and DUD-E decoy which originally have 667 features of molecular description. linear SVM docking predicti of 368 Indonesian herbal chemical compounds with HIV-1 protease from PDB (3OCX). The dataset, which consists 357 positive and 11 negative samples, was labeled by performing manual docking using Autodock. 
-
-This research utilizes machine learning approach to analyze 1,412 chemical compound structures from Indonesian herbal database. From the data, 667 features are extracted from each compounds to build an unlabeled dataset. In order to build a HIV-1 protease inhibitor classification dataset, top 10 of protease inhibitors from related research are used as reference to give positive labels to the unlabeled dataset. Consequently, the remaining 1,402 compounds are labeled as negative. An SVM classifier, which is trained using different public dataset, achieves 66.7\% classification accuracy on it.
+This research evaluates usage feature selection methods to reduce number of features required to predict docking result between Indonesian medicinal plant compounds and HIV protease. Two feature selection methods, Recursive Feature Elimination (RFE) and Wrapper Method (WM), are trained with dataset of 7,331 samples and 667 features from PubChem Bioassay and DUD-E decoys. To evaluate the selected features, a dataset of 368 Indonesian herbal chemical compounds labeled by manually docking to PDB HIV-1 protease is used to benchmark the performance of linear SVM classifier using different sets of features. Our experiments show that set of 471 features selected by RFE and WM achieve reduction of classification time by 4.0 and 8.2 seconds respectively. Although the accuracy and sensitivity are also increased by 8\% and 16\%, no improvement observed for precision and specificity.  
 
 \end{abstract}
 
@@ -161,27 +157,251 @@ This research utilizes machine learning approach to analyze 1,412 chemical compo
 
 \section{Introduction}
 
-Simulasi dinamika molekular membutuhkan sumber daya komputasi dan waktu yang tidak sedikit. Machine learning harusnya dapat membantu memprediksi hasil simulasi dinamika molekular dengan lebih efisien. Riset ini mencoba melatih model machine learning untuk memprediksi hasil docking dari 368 senyawa herbal indonesia dengan protein HIV-1. \cite{yanuar2014virtual}
+The evolution of viruses can makes them resistant to existing drugs. One of the most popular case is HIV (Human Immunodeficiency Virus) which caused AIDS (Acquired Immunodeficiency Syndrome), which has been a global issue for years. HIV possesses a high drugs resistance due to its high replication and mutation abilities. Since drug discovery is a very complicated, expensive and time-consuming, curing AIDS and other illness caused by evolving virus become very challenging\cite{yanuar2014virtual}.
+
+In order to discover new drugs, first, one needs to find a set of chemical compound candidates by observing reaction to drug target in the lab. This process is usually called high-throughput screening (HTS). Despite of its importance, this process is considered inefficient and expensive because most of chemical compounds consumed in the experiments. One way to make this process more efficient is by reducing the number of compounds that need to be tested in lab by performing virtual screening beforehand \cite{chen2017developing}. By having the number of lab experiments reduced, ultimately it will reduce overall time and cost needed in drug discovery \cite{korkmaz2014drug}.
+
+Virtual screening applies computer algorithms to find chemical compounds that have high probability of reaction to drug's target. One of its approach is ligand-based screening (LBS), where new candidates are chosen based on their structural or characteristic similarity to known drug's chemical compounds. This implies that LBS approach relies on previous drug discovery results, which usually obtained using HTS such as PubChem BioAssay \cite{bioassay2014update}, CHEMBL \cite{bento2014chembl}, PubChem Compound \cite{kim2015pubchem} and ZINC \cite{irwin2012zinc}.
+
+Since LBS is also a pattern matching problem, supervised learning algorithms can be used to classify chemical compounds using database of known drug descriptions as training dataset. The number of features required to described each compounds also affects the performance of both supervised and unsupervised learning algorithms. This phenomenon is usually addressed as the curse of dimensionality \cite{janecek2008relationship}. Two techniques commonly applied to solve this phenomenon are feature extraction and feature selection. While the first one extracts or processes existing features to get set of new ones, the last one selects a subset of features from the existing ones. This research focuses on observing the performance of two feature selection methods, SVM Recursive Feature Elimination (SVM-RFE) and Wrapper Method (WM), to select subset of features from Indonesian herbal chemical compounds that react to HIV-1 protease.
 
 \section{Related Work}
 
+Related research in virtual screening used a method that consist of two phases: First, machine learning based LBS is used to select potential chemical compound candidates, and second, molecular docking is done with between potential candidates and drug's target \cite{hilman2012analisis}. Since molecular docking requires a lot of computational resources, high LBS precision is required to improve efficiency. In the other hand, low recall or sensitivity causes potential candidates excluded \cite{korkmaz2014drug}. This research shows Support Vector Machine (SVM) performs well to classify potential candidates in LBS. Using this as basis, we explore usage of feature selections to improve SVM performance in LBS.
+
+Molecular descriptor is a numerical value representing chemical information encoded within a symbolic representation of a molecule. This numerical value can also be obtained by some standardized experiment on a molecule \cite{yap2011padel}. At least there are 701 types of molecular descriptor that can be extracted from a chemical compounds. Therefore, it is difficult to analyze manually all correlations between descriptors \cite{korkmaz2014drug}. In machine learning based LBS, not all molecular descriptors directly affect the result of classification. For instance, the number of Bromin (Br) atom is always 0 for every compounds in PubChem BioAssay database. There are even around 500 descriptors behaving in such way in the same database. Therefore, it is also recommended to reduce the number of features by using techniques like Feature Selection \cite{korkmaz2014drug}.
+
+Feature selection can improve accuracy of classification task, and also improves its efficiency by reducing computational costs. On top of that, it can give better understanding about the resulted model as suggested by another related research \cite{janecek2008relationship}. But it should also be noted that improvement given by application of feature selection is depending on the type of data. Hence, the result of its application may vary between datasets\cite{janecek2008relationship}. To anticipate this, our experiments use datasets from two different sources: public source (PubChem BioAssay + DUD-E) and Indonesian Herbal DB.
+
+\section{Dataset} \label{Dataset}
+
 TODO
+
+%Dalam penelitian ini, untuk training set akan digunakan PubChem Bioassay, su-
+%atu basis data yang disediakan oleh NCBI yang menyediakan deskripsi bioassay
+%termasuk kondisi dan prosedur screening dari beragam senyawa. Selanjutnya
+%dalam penelitian ini akan melakukan virtual screening terhadap dataset senyawa
+%zat alami Tanaman Obat Herbal Indonesia. Database Tanaman Obat Herbal
+%Indonesia merupakan hasil dari upaya Departemen Farmasi FMIPA UI untuk
+%mengumpulkan struktur 3D senyawa-senyawa kimia yang terkandung dalam
+%Tanaman Herbal Indonesia.
+
+%Dataset kedua berasal dari Database Tanaman Herbal Indonesia (Yanuar et al.,
+%2011). Database ini merupakan upaya Departemen Farmasi FMIPA UI untuk
+%mengumpulkan struktur 3D senyawa-senyawa kimia yang terkandung dalam
+%tanaman herbal. Sampai saat ini pada database tersebut telah terkumpul
+%tidak kurang dari 1412 struktur senyawa kimia dari tanaman herbal Indonesia.
+%Akan dicari senyawa yang dapat menghambat (inhibitor ) HIV-1 protease dari
+%senyawa-senyawa yang terdapat pada dataset ini.
+%Langkah pertama yang dilakukan adalah preprocessing untuk mendapatkan
+%feature dari setiap senyawa. Pada langkah ini molecular description setiap
+%senyawa akan diekstrak untuk digunakan sebagai feature. Ektraksi ini dilakukan
+%menggunakan PaDEL Description (Yap, 2010). Sebanyak 667 molecular de-
+%scription akan diekstrak oleh PaDEL Description, tabel 3.1 menunjukan jenis
+%molecular description yang diekstrak
+
+%Tabel Jenis molecular description yang dapat
+%diextract oleh PaDEL Description.
+
+%ALOGP
+%APol
+%Aromatic atoms counts
+%Aromatic bonds count
+%Atom count
+%Autocorrelation (charge)
+%Autocorrelation (mass)
+%Autocorrelation (polarizability)
+%BCUT
+%Bound count
+%BPol
+%Carbon types
+%Chi chain
+%Chi cluster
+%Chi path
+%Chi path cluster
+%Eccentric connectivity index 
+%Atom type electrotopological state
+%Fragment complexity
+%Hbond acceptor count
+%Hbond donor count
+%Kappa shape indices
+%Largest chain
+%Largest Pi system
+%Longest aliphatic chain
+%Mannhold LogP
+%McGowan volume
+%Molecular distance edge
+%Molecular linear free energy relation
+%Petitjean number
+%Ring count
+%Rotatable bonds count
+%Rule of five
+%Topological polar surface area
+%Vertex adjacency information (magnitude)
+%Weight
+%Weighted path
+%Wiener numbers
+%XlogP
+%Zagreb index
+%
+%3
+%1
+%1
+%1
+%13
+%5
+%5
+%5
+%6
+%5
+%1
+%9
+%10
+%8
+%16
+%6
+%1 
+%482
+%1
+%1
+%1
+%3
+%1
+%1
+%1
+%1
+%1
+%19
+%6
+%1
+%34
+%1
+%1
+%1
+%1
+%1
+%5
+%2
+%1
+%1
+%
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+%2D
+
+%Dataset dibuat dengan mencoba melakukan simulasi docking 368 senyawa herbal indonesia dengan protein HIV-1 menggunakan PyRx \& Autodock. Senyawa yang berhasil docking diberi label positif (357 senyawa) dan yang gagal diberi label negatif (11 senyawa).
+
+%Molecular Docking
+%
+%Tahap terakhir adalah melakukan docking senyawa-senyawa yang diprediksi
+%sebagai obat oleh pengklasifikasi SVM-RFE pada langkah sebelumnya. Hal ini
+%dilakukan untuk memastikan apakah senyawa-senyawa tersebut dapat bereaksi
+%dengan target obat. Docking dilakukan menggunakan PyRx, yaitu GUI frontend
+%untuk Autodock.
+%Target yang digunakan adalah HIV-1 protease yang berasal dari PDB dengan
+%kode 3OCX. Gambar 4.6 menunjukan struktur target yang digunakan. Sebelum
+%digunakan sebagai target docking, protein target dibersikan dari molekul air
+%dan residu lainnya. Koordinat XYZ yang digunakan pada saat docking adalah
+%5.192, -4.557, 14.799, dengan ukuran gridbox 50x50x50 unit, serta evaluasi
+%energi maksimum sebesar 1,000,000.
+
+%Dataset PubChem BioAssay akan digunakan untuk melatih pengklasifikasi.
+%Akan digunakan BioAssay yang memiliki target HIV-1 protease (GI:75593047),
+%seperti AID 162030, AID 160444 dan AID 83109. BioAssay tersebut merupakan
+%hasil percobaan untuk mencari senyawa HIV-1 protease inhibitor. Hal ini di-
+%lakukan agar sejalan dengan penelitian (Yanuar, Suhartanto, Mun’im, Anugrah, & Syahdi, 2014) untuk mencari HIV-1 protease inhibitor pada tanaman obat herbal indonesia.
+
+\section{Feature Selection} \label{Feature Selection}
+
+%Wrapper Method
+%
+%Pada wrapper method, feature selection dilakukan memanfaatkan algoritma
+%machine learning sebagai black box, dengan kata lain pengetahuan bagaimana
+%cara algoritma tersebut bekerja tidak diperlukan, hanya antarmukanya saja.
+%Wrapper method memanfaatkan machine learning untuk mengevaluasi kualitas
+%dari fitur-fitur terpilih. Bagian feature selection search akan menghasilkan kumpulan fitur-fitur, dan
+%bagian feature evaluation akan memanfaatkan classifier yang dihasilkan oleh machine learning untuk mengukur performanya, yang selanjutnya digunakan
+%oleh feature selection search pada iterasi pencarian kumpulan fitur-fitur selan-
+%jutnya. Kumpulan fitur-fitur dengan peforma tertinggi akan digunakan untuk
+%menghasilkan classifier akhir. Classifier ini akan dievaluasi menggunakan data
+%set testing yang tidak digunakan pada proses learning. (Tang, Alelyani, & Liu,
+%2014)
+%
+%SVM Recursive Feature Elimination
+%
+%SVM Recursive Feature Elimination (SVM-RFE) pertama kali diajukan oleh
+%Guyon, Weston, and Barnhill, 2002 untuk memilih gen yang relevan pada
+%problem klasifikasi kanker. SVM-RFE memanfaatkan bobot pada hyperplane
+%yang dihasilkan sebagai rangking fitur. SVM-RFE terdiri dari empat langkah
+%berikut:
+%1. Melatih SVM menggunakan data set training.
+%2. Urutkan fitur berdasarkan bobot pada pengklasifikasi yang dihasilkan.
+%3. Buang fitur dengan bobot terkecil.
+%4. Ulangi proses diatas menggunakan fitur-fitur yang tersisa.
 
 
 \section{Experiments} \label{Experiments}
 
-Dataset dibuat dengan mencoba melakukan simulasi docking 368 senyawa herbal indonesia dengan protein HIV-1 menggunakan PyRx \& Autodock. Senyawa yang berhasil docking diberi label positif (357 senyawa) dan yang gagal diberi label negatif (11 senyawa).
+TODO
 
-Eksperimen yang dilakukan:
-1. Data latih dan data uji PubChem
-2. Data latih PubChem, data uji HerbalDB
-3. Data latih dan data uji HerbalDB
+%
+%Eksperimen yang dilakukan:
+%1. Data latih dan data uji PubChem
+%2. Data latih PubChem, data uji HerbalDB
+%3. Data latih dan data uji HerbalDB
+%
+%Model yang digunakan untuk tiap eksperimen adalah
+%1. SVM
+%2. SVM + RFE
+%3. SVM + WM (GA)
+%4. (ditambah sesuai kebutuhan)
 
-Model yang digunakan untuk tiap eksperimen adalah
-1. SVM
-2. SVM + RFE
-3. SVM + WM (GA)
-4. (ditambah sesuai kebutuhan)
+%Evaluasi peforma dilakukan dengan pengukuran berikut:
+%
+%Accuracy rate = TP + TN / TP + TN + FP + FN
+%Sensitivity = TP / TP + FN
+%Specificity = TN / TN + FP
+%Precision = TP / TP + FP
+%
+%Dimana, T P = true positive, T N = true negative, F P = false positive, dan F N = false negative.
+
 
 \begin{figure}
 	\includegraphics[scale=0.5]{../images/03-evaluate-1_scores_chart.png}
@@ -215,6 +435,8 @@ Model yang digunakan untuk tiap eksperimen adalah
 \end{figure}
 
 \section{Analysis}
+
+TODO
 
 Model mana yang paling akurat memprediksi hasil docking senyawa dengan HIV-1
 

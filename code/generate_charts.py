@@ -8,7 +8,9 @@ import numpy as np
 import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
+import json
 import os
+import re
 
 # check if display available
 if os.name == 'posix' and "DISPLAY" not in os.environ:
@@ -41,5 +43,13 @@ plt.suptitle('Classification time comparison')
 plt.xlabel('Time (s)')
 plt.ylabel('')
 plt.savefig('classification_time_comparison.png')
+
+# get intersection between SVM-RFE and WM featues
+with open('SVM_RFE_features_mask.json', 'r') as f_svm_rfe, open('WM_GA_SVM_features_mask.json', 'r') as f_wm:
+    feature_mask_svm_rfe = json.load(f_svm_rfe)
+    feature_mask_wm = json.load(f_wm)
+    n = set(feature_mask_wm).intersection(feature_mask_svm_rfe)
+    print('Found {} common features:'.format(len(n)))
+    print(n)
 
 plt.show()

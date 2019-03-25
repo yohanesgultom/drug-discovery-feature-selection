@@ -1,0 +1,11 @@
+Top 10 most important features Indonesian Herbal DB:
+1. feature 585 (Kier2): 0.02494
+2. feature 586 (Kier3): 0.02416
+3. feature 652 (nRotB): 0.01944
+4. feature 1 (ALogp2): 0.01909
+5. feature 102 (nHBint3): 0.01457
+6. feature 656 (MW): 0.01423
+7. feature 20 (ATSc2): 0.01279
+8. feature 2 (AMR): 0.01269
+9. feature 96 (ECCEN): 0.01238
+10. feature 99 (nHBa): 0.01216

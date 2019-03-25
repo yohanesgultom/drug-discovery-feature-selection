@@ -73,4 +73,52 @@ C.~W. Yap, ``Padel-descriptor: An open source software to calculate molecular
   descriptors and fingerprints,'' \emph{Journal of computational chemistry},
   vol.~32, no.~7, pp. 1466--1474, 2011.
 
+\bibitem{mysinger2012directory}
+M.~M. Mysinger, M.~Carchia, J.~J. Irwin, and B.~K. Shoichet, ``Directory of
+  useful decoys, enhanced (dud-e): better ligands and decoys for better
+  benchmarking,'' \emph{Journal of medicinal chemistry}, vol.~55, no.~14, pp.
+  6582--6594, 2012.
+
+\bibitem{yanuar2011medicinal}
+A.~Yanuar, A.~Mun'im, A.~B.~A. Lagho, R.~R. Syahdi, M.~Rahmat, and
+  H.~Suhartanto, ``Medicinal plants database and three dimensional structure of
+  the chemical compounds from medicinal plants in indonesia,'' \emph{arXiv
+  preprint arXiv:1111.7183}, 2011.
+
+\bibitem{morris2009autodock4}
+G.~M. Morris, R.~Huey, W.~Lindstrom, M.~F. Sanner, R.~K. Belew, D.~S. Goodsell,
+  and A.~J. Olson, ``Autodock4 and autodocktools4: Automated docking with
+  selective receptor flexibility,'' \emph{Journal of computational chemistry},
+  vol.~30, no.~16, pp. 2785--2791, 2009.
+
+\bibitem{o2011open}
+N.~M. O'Boyle, M.~Banck, C.~A. James, C.~Morley, T.~Vandermeersch, and G.~R.
+  Hutchison, ``Open babel: An open chemical toolbox,'' \emph{Journal of
+  cheminformatics}, vol.~3, no.~1, p.~33, 2011.
+
+\bibitem{tang2014feature}
+J.~Tang, S.~Alelyani, and H.~Liu, ``Feature selection for classification: A
+  review,'' \emph{Data classification: Algorithms and applications}, p.~37,
+  2014.
+
+\bibitem{DEAP_JMLR2012}
+F.-A. Fortin, F.-M. {De Rainville}, M.-A. Gardner, M.~Parizeau, and C.~Gagn\'e,
+  ``{DEAP}: Evolutionary algorithms made easy,'' \emph{Journal of Machine
+  Learning Research}, vol.~13, pp. 2171--2175, jul 2012.
+
+\bibitem{guyon2002gene}
+I.~Guyon, J.~Weston, S.~Barnhill, and V.~Vapnik, ``Gene selection for cancer
+  classification using support vector machines,'' \emph{Machine learning},
+  vol.~46, no. 1-3, pp. 389--422, 2002.
+
+\bibitem{pedregosa2011scikit}
+F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
+  M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg \emph{et~al.},
+  ``Scikit-learn: Machine learning in python,'' \emph{Journal of machine
+  learning research}, vol.~12, no. Oct, pp. 2825--2830, 2011.
+
+\bibitem{maaten2008visualizing}
+L.~v.~d. Maaten and G.~Hinton, ``Visualizing data using t-sne,'' \emph{Journal
+  of machine learning research}, vol.~9, no. Nov, pp. 2579--2605, 2008.
+
 \end{thebibliography}

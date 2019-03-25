@@ -1,0 +1,11 @@
+Top 10 most important features PubChem BioAssay + DUD-E:
+1. feature 520 (maxsOH): 0.08825
+2. feature 401 (minsOH): 0.07169
+3. feature 282 (SsOH): 0.02951
+4. feature 110 (nHsOH): 0.02754
+5. feature 163 (nsOH): 0.02622
+6. feature 467 (maxHsOH): 0.01737
+7. feature 35 (BCUTw-1l): 0.0163
+8. feature 406 (minsOm): 0.01221
+9. feature 142 (nsssCH): 0.01219
+10. feature 588 (nAtomP): 0.01185

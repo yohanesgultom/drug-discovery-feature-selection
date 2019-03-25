@@ -104,359 +104,301 @@
 }
 
 \begin{document}
-
-% paper title
-\title{Feature selection methods for machine learning based docking prediction of Indonesian medicinal plant compounds and HIV-1 protease}
-
-
-% author names and affiliations
-% use a multiple column layout for up to three different
-% affiliations
-%\author{
-%	\IEEEauthorblockN{Rahman Pujianto}
-%	\IEEEauthorblockA{Faculty of Computer Science\\
-%	Universitas Indonesia\\
-%	Email: rahman.pujianto@ui.ac.id\\}
-%	\and
-%	\IEEEauthorblockN{Heru Suhartanto}
-%	\IEEEauthorblockA{Faculty of Computer Science\\
-%	Universitas Indonesia\\
-%	Email: heru@cs.ui.ac.id\\}
-%}
-
-\author{
-	\IEEEauthorblockN{
-		Rahman Pujianto\IEEEauthorrefmark{1},
-		Yohanes Gultom\IEEEauthorrefmark{2}, 
-		Ari Wibisono\IEEEauthorrefmark{3},		
-		Heru Suhartanto\IEEEauthorrefmark{4}
+	
+	% paper title
+	\title{Feature selection methods for machine learning based docking prediction of Indonesian medicinal plant compounds and HIV-1 protease}
+	
+	
+	% author names and affiliations
+	% use a multiple column layout for up to three different
+	% affiliations
+	%\author{
+	%	\IEEEauthorblockN{Rahman Pujianto}
+	%	\IEEEauthorblockA{Faculty of Computer Science\\
+	%	Universitas Indonesia\\
+	%	Email: rahman.pujianto@ui.ac.id\\}
+	%	\and
+	%	\IEEEauthorblockN{Heru Suhartanto}
+	%	\IEEEauthorblockA{Faculty of Computer Science\\
+	%	Universitas Indonesia\\
+	%	Email: heru@cs.ui.ac.id\\}
+	%}
+	
+	\author{
+		\IEEEauthorblockN{
+			Rahman Pujianto\IEEEauthorrefmark{1},
+			Yohanes Gultom\IEEEauthorrefmark{2}, 
+			Ari Wibisono\IEEEauthorrefmark{3},		
+			Heru Suhartanto\IEEEauthorrefmark{4}
+		}
+		\IEEEauthorblockA{
+			Faculty of Computer Science,
+			Universitas Indonesia\\
+			Email: 
+			\IEEEauthorrefmark{1}rahman.pujianto@ui.ac.id,
+			\IEEEauthorrefmark{2}yohanes.gultom@ui.ac.id,
+			\IEEEauthorrefmark{3}ari.w@cs.ui.ac.id 
+			\IEEEauthorrefmark{4}heru@cs.ui.ac.id		
+		}
 	}
-	\IEEEauthorblockA{
-		Faculty of Computer Science,
-		Universitas Indonesia\\
-		Email: 
-		\IEEEauthorrefmark{1}rahman.pujianto@ui.ac.id,
-		\IEEEauthorrefmark{2}yohanes.gultom@ui.ac.id,
-		\IEEEauthorrefmark{3}ari.w@cs.ui.ac.id 
-		\IEEEauthorrefmark{4}heru@cs.ui.ac.id		
-	}
-}
+	
+	% make the title area
+	\maketitle
+	
+	% As a general rule, do not put math, special symbols or citations
+	% in the abstract
+	\begin{abstract}
+		
+		This research evaluates usage feature selection methods to reduce number of features required to predict docking result between Indonesian medicinal plant compounds and HIV protease. Two feature selection methods, Recursive Feature Elimination (RFE) and Wrapper Method (WM), are trained with dataset of 7,330 samples and 667 features from PubChem Bioassay and DUD-E decoys. To evaluate the selected features, a dataset of 368 Indonesian herbal chemical compounds labeled by manually docking to PDB HIV-1 protease is used to benchmark the performance of linear SVM classifier using different sets of features. Our experiments show that set of 471 features selected by RFE and 249 by WM achieve reduction of classification time by 4.0 and 8.2 seconds respectively. Although the accuracy and sensitivity are also increased by 8\% and 16\%, no meaningful improvement observed for precision and specificity.  
+		
+	\end{abstract}
+	
+	\IEEEpeerreviewmaketitle
+	
+	\section{Introduction}
+	
+	The evolution of viruses can makes them resistant to existing drugs. One of the most popular case is HIV (Human Immunodeficiency Virus) which caused AIDS (Acquired Immunodeficiency Syndrome), which has been a global issue for years. HIV possesses a high drugs resistance due to its high replication and mutation abilities. Since drug discovery is a very complicated, expensive and time-consuming, curing AIDS and other illness caused by evolving virus become very challenging\cite{yanuar2014virtual}.
+	
+	In order to discover new drugs, first, one needs to find a set of chemical compound candidates by observing reaction to drug target in the lab. This process is usually called high-throughput screening (HTS). Despite of its importance, this process is considered inefficient and expensive because most of chemical compounds consumed in the experiments. One way to make this process more efficient is by reducing the number of compounds that need to be tested in lab by performing virtual screening beforehand \cite{chen2017developing}. By having the number of lab experiments reduced, ultimately it will reduce overall time and cost needed in drug discovery \cite{korkmaz2014drug}.
+	
+	Virtual screening applies computer algorithms to find chemical compounds that have high probability of reaction to drug's target. One of its approach is ligand-based screening (LBS), where new candidates are chosen based on their structural or characteristic similarity to known drug's chemical compounds. This implies that LBS approach relies on previous drug discovery results, which usually obtained using HTS such as PubChem BioAssay \cite{bioassay2014update}, CHEMBL \cite{bento2014chembl}, PubChem Compound \cite{kim2015pubchem} and ZINC \cite{irwin2012zinc}.
+	
+	Since LBS is also a pattern matching problem, supervised learning algorithms can be used to classify chemical compounds using database of known drug descriptions as training dataset. The number of features required to described each compounds also affects the performance of both supervised and unsupervised learning algorithms. This phenomenon is usually addressed as the curse of dimensionality \cite{janecek2008relationship}. Two techniques commonly applied to solve this phenomenon are feature extraction and feature selection. While the first one extracts or processes existing features to get set of new ones, the last one selects a subset of features from the existing ones. This research focuses on observing the performance of two feature selection methods, SVM Recursive Feature Elimination (SVM-RFE) and Wrapper Method (WM), to select subset of features from Indonesian herbal chemical compounds that react to HIV-1 protease.
+	
+	\section{Related Work}
+	
+	Related research in virtual screening used a method that consist of two phases: First, machine learning based LBS is used to select potential chemical compound candidates, and second, molecular docking is done with between potential candidates and drug's target \cite{hilman2012analisis}. Since molecular docking requires a lot of computational resources, high LBS precision is required to improve efficiency. In the other hand, low recall or sensitivity causes potential candidates excluded \cite{korkmaz2014drug}. This research shows Support Vector Machine (SVM) performs well to classify potential candidates in LBS. Using this as basis, we explore usage of feature selections to improve SVM performance in LBS.
+	
+	Molecular descriptor is a numerical value representing chemical information encoded within a symbolic representation of a molecule. This numerical value can also be obtained by some standardized experiment on a molecule \cite{yap2011padel}. At least there are 701 types of molecular descriptor that can be extracted from a chemical compounds. Therefore, it is difficult to analyze manually all correlations between descriptors \cite{korkmaz2014drug}. In machine learning based LBS, not all molecular descriptors directly affect the result of classification. For instance, the number of Bromin (Br) atom is always 0 for every compounds in PubChem BioAssay database. There are even around 500 descriptors behaving in such way in the same database. Therefore, it is also recommended to reduce the number of features by using techniques like Feature Selection \cite{korkmaz2014drug}.
+	
+	Feature selection can improve accuracy of classification task, and also improves its efficiency by reducing computational costs. On top of that, it can give better understanding about the resulted model as suggested by another related research \cite{janecek2008relationship}. But it should also be noted that improvement given by application of feature selection is depending on the type of data. Hence, the result of its application may vary between datasets\cite{janecek2008relationship}. To anticipate this, our experiments use datasets from two different sources: public source (PubChem BioAssay + DUD-E) and Indonesian Herbal DB.
+	
+	\section{Dataset} \label{Dataset}
+	
+	In order to test the effectiveness and efficiency of the feature selections, two datasets are used. The first one is a combination between extracted molecular descriptors from PubChem BioAssay HIV-1 inhibitor \cite{bioassay2014update} and DUD-E decoy chemical compounds\cite{mysinger2012directory}. The second one is built by extracting descriptors from Indonesian Herbal DB, a database of molecular structure from local medicinal plants \cite{yanuar2011medicinal}, and labeling each of them based on manual docking result with HIV-1 inhibitor using Autodock \cite{morris2009autodock4}.  
+	
+	The first dataset consists of 7,330 samples: 3,665 compounds labeled as positive, and 3,665 decoys as negative. The positive come from AID 162030, AID 160444 and AID 83109 compounds which target HIV-1 protease (GI:75593047) which are also used in related research\cite{yanuar2014virtual}. These compounds are part of PubChem BioAssay database published by National Center for Biotechnology Information (NCBI). The negative samples are decoy compounds which don't target HIV-1 protease. They are part of Database of Useful Decoys - Enhanced (DUD-E) which are provided by Shoichet Laboratory in the Department of Pharmaceutical Chemistry at the University of California, San Francisco (UCSF) \cite{mysinger2012directory}. OpenBabel\cite{o2011open} is used to extract Molfile (MOL2) from original structure-data file (SDF) from PubChem BioAssay and DUD-E, then PaDel Descriptor\cite{yap2011padel} is used to extract 667 molecular descriptors listed in Table \ref{table_molecule_descriptors} for each compounds. Through these processes, we acquired a balanced dataset for supervised learning.
+	
+	\begin{table}
+	\renewcommand{\arraystretch}{1.1}
+	\caption{Molecule descriptors extracted using Padel Descriptor}
+	\label{table_molecule_descriptors}
+	\centering
+	\begin{tabular}{|l|c|c|}
+		\hline 
+		Descriptor Type & Number
+		& Class \\ 
+		\hline 
+		ALOGP & 	3  & 2D \\
+		APol & 	1  & 2D \\
+		Aromaticatomscounts & 	1  & 2D \\
+		Aromaticbondscount & 	1  & 2D \\
+		Atomcount & 	13  & 2D \\
+		Autocorrelation(charge) & 	5  & 2D \\
+		Autocorrelation(mass) & 	5  & 2D \\
+		Autocorrelation(polarizability) & 	5  & 2D \\
+		BCUT & 	6  & 2D \\
+		Boundcount & 	5  & 2D \\
+		BPol & 	1  & 2D \\
+		Carbontypes & 	9  & 2D \\
+		Chichain & 	10  & 2D \\
+		Chicluster & 	8  & 2D \\
+		Chipath & 	16  & 2D \\
+		Chipathcluster & 	6  & 2D \\
+		Eccentricconnectivityindex & 	1  & 2D \\
+		Atomtypeelectrotopologicalstate & 	482  & 2D \\
+		Fragmentcomplexity & 	1  & 2D \\
+		Hbondacceptorcount & 	1  & 2D \\
+		Hbonddonorcount & 	1  & 2D \\
+		Kappashapeindices & 	3  & 2D \\
+		Largestchain & 	1  & 2D \\
+		LargestPisystem & 	1  & 2D \\
+		Longestaliphaticchain & 	1  & 2D \\
+		MannholdLogP & 	1  & 2D \\
+		McGowanvolume & 	1  & 2D \\
+		Moleculardistanceedge & 	19  & 2D \\
+		Molecularlinearfreeenergyrelation & 	6  & 2D \\
+		Petitjeannumber & 	1  & 2D \\
+		Ringcount & 	34  & 2D \\
+		Rotatablebondscount & 	1  & 2D \\
+		Ruleoffive & 	1  & 2D \\
+		Topologicalpolarsurfacearea & 	1  & 2D \\
+		Vertexadjacencyinformation(magnitude) & 	1  & 2D \\
+		Weight & 	1  & 2D \\
+		Weightedpath & 	5  & 2D \\
+		Wienernumbers & 	2  & 2D \\
+		XlogP & 	1  & 2D \\
+		Zagrebindex & 	1  & 2D \\	
+		\hline 
+	\end{tabular} 
+	\end{table}	
+	
+	Our main dataset is made of molecular descriptors from Indonesian Herbal DB which is produced by Pharmacy Department, Faculty of Mathematics and Natural Sciences, Universitas Indonesia (FMIPA UI) \cite{yanuar2011medicinal}. The descriptors are also extracted from original Molfile (MOL2) with Padel Descriptor using same configuration as the first dataset to obtain same set of descriptors. Since Indonesian Herbal DB is just a collection of chemical compounds 3D structural data, docking simulations with HIV-1 needs to be done in order to know which of them are positive and negative samples. Docking simulation with Autodock is done for 368 compounds from Indonesian Herbal DB against HIV-1 protein from Protein Data Bank (PDB) where 357 are positive and 11 negative. The XYZ coordinate used in the docking simulation is 5.192, -4.557, 14.799, the dimension of gridbox is 50x50x50 unit, and maximum energy evaluation is set to 1,000,000.
+	
+	\section{Feature Selection} \label{Feature Selection}
+	
+	In this research, two feature selection methods are evaluated:
 
-% make the title area
-\maketitle
+	\subsection{Wrapper Method}
+	
+	Wrapper method, as its name suggests, wraps (actual) feature selection, evaluation, and learning algorithms as a black box\cite{tang2014feature}. In the black box part, it evaluates sets of features generated by selection algorithm and keeps the best set as final result. Its architecture is described by Figure \ref{fig_wrapper_method_architecture}. In this research, Genetic Algorithm (GA) implementation of DEAP \cite{DEAP_JMLR2012} is used as features selection and learning algorithm. Linear SVM is used to evaluate every set of features produced by GA based on accuracy score.
+	
+	\begin{figure}
+		\includegraphics[scale=0.3]{../images/wrapper_method.png}
+		\caption{Wrapper method architecture \cite{tang2014feature}}
+		\label{fig_wrapper_method_architecture}
+	\end{figure}
+	
+	\subsection{SVM Recursive Feature Elimination}
+	
+	SVM recursive feature elimination (SVM-RFE) is another feature selection method which initially introduced to choose relevant genes in cancers classification task \cite{guyon2002gene}. SVM-RFE ranks features based on their weights in hyperplane and progressively reduce the number of features from lowest rank. In a nutshell, it does these four steps:
+	
+	\begin{enumerate}
+		\item Trains linear SVM classifiers using training data
+		\item Sort features based on their ranks
+		\item Drop the lowest ranked feature
+		\item Repeat steps using remaining features until none left
+	\end{enumerate}
+		
+	In this research, Scikit-Learn implementation of SVM-RFE is used \cite{pedregosa2011scikit}. Internally, it uses Linear SVM to rank features for incremental/recursive removal.
+		
+	\section{Experiments} \label{Experiments}
+	
+	The first dataset, which is combination of PubChem BioAssay + DUD-E decoys, are used for feature selection using both methods, wrapper method (WM) and SVM recursive feature elimination. For both method, accuracy score is used as a metric to determine the performance of features set. 
+	
+	The SVM-RFE method selects 471 features which achieves 0.9915 accuracy on PubChem BioAssay + DUD-E decoys dataset. Figure \ref{fig_svmrfe_acc_num_features_chart} shows a chart visualizing relations between number of features selected by SVM-RFE and their accuracy. It can be observed that the score starts decreasing when the number of selected features is below 50. However even with only a single highest ranked feature the linear SVM achieves accuracy > 0.8.
+		
+	\begin{figure}
+		\includegraphics[scale=0.5]{../images/SVM_RFE_chart.png}
+		\caption{SVM recursive feature elimination accuracy per feature sets}
+		\label{fig_svmrfe_acc_num_features_chart}
+	\end{figure}
+	
+	The wrapper method, which uses genetic algorithm with 100 generations and 20 population per generation as selection algorithm, chooses only 249 features achieving maximum Linear SVM accuracy of 0.9916. There are 244 features in common with result from SVM-RFE. Chart in Figure \ref{fig_wm_acc_chart} shows that even from first generation, the average accuracy has achieved > 0.9. While Figure \ref{fig_wm_num_features_chart} shows that every best candidate in each generation use between 240-265 features.
+		
+	\begin{figure}
+		\includegraphics[scale=0.5]{../images/WM_GA_SVM_acc_chart.png}
+		\caption{Wrapper method with Genetic Algorithm accuracy scores}
+		\label{fig_wm_acc_chart}
+	\end{figure}
+	
+	\begin{figure}
+		\includegraphics[scale=0.5]{../images/WM_GA_SVM_feat_chart.png}
+		\caption{Wrapper method with Genetic Algorithm number of features}
+		\label{fig_wm_num_features_chart}
+	\end{figure}
+	
+	Additionally, the execution time comparison for SVM-RFE and WM is shown by Figure \ref{fig_feature_selection_time_comparison}. It shows that WM requires much longer time than SVM-RFE to get its final result. This experiment measures total time to execute each method' script on an Ubuntu 16.04 LTS machine with Core i7 5500U, 8 GB RAM and 256 SSD storage.
+		
+	\begin{figure}
+		\includegraphics[scale=0.5]{../images/feature_selection_time_comparison.png}
+		\caption{Feature selection time comparison}
+		\label{fig_feature_selection_time_comparison}
+	\end{figure}
+		
+	Having obtained two sets of features selected by SVM-RFE and WM, following experiments aim to compare performance between them and without feature selection. Metrics used in this experiment are based on true/false positive/negative scores: area under curve (AUC), accuracy, sensitivity, specificity and precision. The additional metrics are important because unlike the first dataset, the second one has unbalanced ratio of positive and negative samples.
 
-% As a general rule, do not put math, special symbols or citations
-% in the abstract
-\begin{abstract}
+	\begin{align}
+	accuracy = \frac{TP + TN}{TP + TN + FP + FN} \\
+	sensitivity = \frac{TP}{TP + FN} \\	
+	specificity = \frac{TN}{TN + FP} \\		
+	precision = \frac{TP}{TP + FP} \\			
+	\label{eq_performance_metrics}
+	\end{align}
 
-This research evaluates usage feature selection methods to reduce number of features required to predict docking result between Indonesian medicinal plant compounds and HIV protease. Two feature selection methods, Recursive Feature Elimination (RFE) and Wrapper Method (WM), are trained with dataset of 7,331 samples and 667 features from PubChem Bioassay and DUD-E decoys. To evaluate the selected features, a dataset of 368 Indonesian herbal chemical compounds labeled by manually docking to PDB HIV-1 protease is used to benchmark the performance of linear SVM classifier using different sets of features. Our experiments show that set of 471 features selected by RFE and WM achieve reduction of classification time by 4.0 and 8.2 seconds respectively. Although the accuracy and sensitivity are also increased by 8\% and 16\%, no improvement observed for precision and specificity.  
+	Figure \ref{fig_roc_comparison_pubchem} shows ROC (Receiver Operating Characteristics) curve and AUC score of three models when trained and tested with single PubChem BioAssay + DUD-E dataset (cross validation): Linear SVM with SVM-RFE, WM, and without feature selection. It shows that there is almost no improvement made by feature selections, as the AUC score of the model without feature selection is the same as SVM-RFE model, and even slightly higher than WM model. Similar result is also indicated by accuracy/sensitivity/precision/specificity chart in Figure \ref{fig_performance_comparison_pubchem} where Linear SVM without feature selection is slightly better than both with WM and SVM-RFE.
+		
+	\begin{figure}
+		\includegraphics[scale=0.5]{../images/03-evaluate-1_roc_chart.png}
+		\caption{AUC-ROC curve comparison on PubChem BioAssay + DUD-E dataset}
+		\label{fig_roc_comparison_pubchem}
+	\end{figure}
+	
+	\begin{figure}
+		\includegraphics[scale=0.5]{../images/03-evaluate-1_scores_chart.png}
+		\caption{Classification performance comparison on PubChem BioAssay + DUD-E dataset}
+		\label{fig_performance_comparison_pubchem}
+	\end{figure}
+	
+	When same models trained using first dataset but tested on second dataset, which is the manual docking result between Indonesian Herbal DB and HIV-1 protein, the AUC-ROC curve in Figure \ref{fig_performance_comparison_herbaldb} shows significantly lower performance compared to previous experiment but also shows no improvement due to feature selection. Although most metrics in Figure \ref{fig_performance_comparison_herbaldb} reflect the lower performance also shown by AUC-ROC curve, precision remains relatively high. These results indicate that the problem lies in detecting true negative samples.
 
-\end{abstract}
+	\begin{figure}
+		\includegraphics[scale=0.5]{../images/03-evaluate-3_roc_chart.png}
+		\caption{AUC-ROC curve comparison on Herbal DB dataset}
+		\label{fig_roc_comparison_herbaldb}
+	\end{figure}
+	
+	\begin{figure}
+		\includegraphics[scale=0.5]{../images/03-evaluate-3_scores_chart.png}
+		\caption{Classification performance comparison on Herbal DB dataset}
+		\label{fig_performance_comparison_herbaldb}
+	\end{figure}
+	
+	To gain more insight of the performance, another experiment is done by training and testing the models using only Indonesian Herbal DB dataset. Figure \ref{fig_roc_comparison_herbaldb_only} and \ref{fig_performance_comparison_herbaldb_only} show better results than experiment that uses PubChem BioAssay + DUD-E dataset as training data. However, specificity remains very low achieving only 0.5 for all models.
+	
+	\begin{figure}
+		\includegraphics[scale=0.5]{../images/03-evaluate-4_roc_chart.png}
+		\caption{AUC-ROC curve comparison of model trained and tested with Herbal DB dataset}
+		\label{fig_roc_comparison_herbaldb_only}
+	\end{figure}
+	
+	\begin{figure}
+		\includegraphics[scale=0.5]{../images/03-evaluate-4_scores_chart.png}
+		\caption{Classification performance comparison of model trained and tested with Herbal DB dataset}
+		\label{fig_performance_comparison_herbaldb_only}
+	\end{figure}	
+		
+	In the last experiment, classification time of each models for both datasets are also calculated. As expected, Figure \ref{fig_classification_time_comparison} shows that time required to classify samples is proportional to the number of features used.
+		
+	\begin{figure}
+		\includegraphics[scale=0.5]{../images/classification_time_comparison.png}
+		\caption{Classification time comparison}
+		\label{fig_classification_time_comparison}
+	\end{figure}
+	
+	\section{Analysis}
 
-\IEEEpeerreviewmaketitle
+	The experiments show that SVM-RFE and WM feature selections don't improve performance of Liner SVM classifier for both datasets. But since there are not significant decrease of performance, they are still useful to improve efficiency by reducing number of features processed and ultimately the whole classification time by 25\%-50\%.
+	
+	Compared to SVM-RFE, WM with genetic algorithm requires twice longer time to select features. Despite of that, WM manages to choose half of the SVM-RFE features. Since feature selection process is only need to be done once and classification process is done multiple times, WM achieves better efficiency than SVM-RFE without sacrificing significant classification performance.
+		
+	\begin{figure}
+		\includegraphics[scale=0.5]{../images/visualize-dataset_tsne_pubchem_100.png}
+		\caption{TSNE visualization of PubChem BioAssay + DUD-E dataset}
+		\label{fig_tsne_pubchem}
+	\end{figure}
+	
+	\begin{figure}
+		\includegraphics[scale=0.5]{../images/visualize-dataset_tsne_herbaldb_expanded_100.png}
+		\caption{TSNE visualization of Indonesian Herbal DB dataset}
+		\label{fig_tsne_herbaldb}
+	\end{figure}	
 
-\section{Introduction}
-
-The evolution of viruses can makes them resistant to existing drugs. One of the most popular case is HIV (Human Immunodeficiency Virus) which caused AIDS (Acquired Immunodeficiency Syndrome), which has been a global issue for years. HIV possesses a high drugs resistance due to its high replication and mutation abilities. Since drug discovery is a very complicated, expensive and time-consuming, curing AIDS and other illness caused by evolving virus become very challenging\cite{yanuar2014virtual}.
-
-In order to discover new drugs, first, one needs to find a set of chemical compound candidates by observing reaction to drug target in the lab. This process is usually called high-throughput screening (HTS). Despite of its importance, this process is considered inefficient and expensive because most of chemical compounds consumed in the experiments. One way to make this process more efficient is by reducing the number of compounds that need to be tested in lab by performing virtual screening beforehand \cite{chen2017developing}. By having the number of lab experiments reduced, ultimately it will reduce overall time and cost needed in drug discovery \cite{korkmaz2014drug}.
-
-Virtual screening applies computer algorithms to find chemical compounds that have high probability of reaction to drug's target. One of its approach is ligand-based screening (LBS), where new candidates are chosen based on their structural or characteristic similarity to known drug's chemical compounds. This implies that LBS approach relies on previous drug discovery results, which usually obtained using HTS such as PubChem BioAssay \cite{bioassay2014update}, CHEMBL \cite{bento2014chembl}, PubChem Compound \cite{kim2015pubchem} and ZINC \cite{irwin2012zinc}.
-
-Since LBS is also a pattern matching problem, supervised learning algorithms can be used to classify chemical compounds using database of known drug descriptions as training dataset. The number of features required to described each compounds also affects the performance of both supervised and unsupervised learning algorithms. This phenomenon is usually addressed as the curse of dimensionality \cite{janecek2008relationship}. Two techniques commonly applied to solve this phenomenon are feature extraction and feature selection. While the first one extracts or processes existing features to get set of new ones, the last one selects a subset of features from the existing ones. This research focuses on observing the performance of two feature selection methods, SVM Recursive Feature Elimination (SVM-RFE) and Wrapper Method (WM), to select subset of features from Indonesian herbal chemical compounds that react to HIV-1 protease.
-
-\section{Related Work}
-
-Related research in virtual screening used a method that consist of two phases: First, machine learning based LBS is used to select potential chemical compound candidates, and second, molecular docking is done with between potential candidates and drug's target \cite{hilman2012analisis}. Since molecular docking requires a lot of computational resources, high LBS precision is required to improve efficiency. In the other hand, low recall or sensitivity causes potential candidates excluded \cite{korkmaz2014drug}. This research shows Support Vector Machine (SVM) performs well to classify potential candidates in LBS. Using this as basis, we explore usage of feature selections to improve SVM performance in LBS.
-
-Molecular descriptor is a numerical value representing chemical information encoded within a symbolic representation of a molecule. This numerical value can also be obtained by some standardized experiment on a molecule \cite{yap2011padel}. At least there are 701 types of molecular descriptor that can be extracted from a chemical compounds. Therefore, it is difficult to analyze manually all correlations between descriptors \cite{korkmaz2014drug}. In machine learning based LBS, not all molecular descriptors directly affect the result of classification. For instance, the number of Bromin (Br) atom is always 0 for every compounds in PubChem BioAssay database. There are even around 500 descriptors behaving in such way in the same database. Therefore, it is also recommended to reduce the number of features by using techniques like Feature Selection \cite{korkmaz2014drug}.
-
-Feature selection can improve accuracy of classification task, and also improves its efficiency by reducing computational costs. On top of that, it can give better understanding about the resulted model as suggested by another related research \cite{janecek2008relationship}. But it should also be noted that improvement given by application of feature selection is depending on the type of data. Hence, the result of its application may vary between datasets\cite{janecek2008relationship}. To anticipate this, our experiments use datasets from two different sources: public source (PubChem BioAssay + DUD-E) and Indonesian Herbal DB.
-
-\section{Dataset} \label{Dataset}
-
-TODO
-
-%Dalam penelitian ini, untuk training set akan digunakan PubChem Bioassay, su-
-%atu basis data yang disediakan oleh NCBI yang menyediakan deskripsi bioassay
-%termasuk kondisi dan prosedur screening dari beragam senyawa. Selanjutnya
-%dalam penelitian ini akan melakukan virtual screening terhadap dataset senyawa
-%zat alami Tanaman Obat Herbal Indonesia. Database Tanaman Obat Herbal
-%Indonesia merupakan hasil dari upaya Departemen Farmasi FMIPA UI untuk
-%mengumpulkan struktur 3D senyawa-senyawa kimia yang terkandung dalam
-%Tanaman Herbal Indonesia.
-
-%Dataset kedua berasal dari Database Tanaman Herbal Indonesia (Yanuar et al.,
-%2011). Database ini merupakan upaya Departemen Farmasi FMIPA UI untuk
-%mengumpulkan struktur 3D senyawa-senyawa kimia yang terkandung dalam
-%tanaman herbal. Sampai saat ini pada database tersebut telah terkumpul
-%tidak kurang dari 1412 struktur senyawa kimia dari tanaman herbal Indonesia.
-%Akan dicari senyawa yang dapat menghambat (inhibitor ) HIV-1 protease dari
-%senyawa-senyawa yang terdapat pada dataset ini.
-%Langkah pertama yang dilakukan adalah preprocessing untuk mendapatkan
-%feature dari setiap senyawa. Pada langkah ini molecular description setiap
-%senyawa akan diekstrak untuk digunakan sebagai feature. Ektraksi ini dilakukan
-%menggunakan PaDEL Description (Yap, 2010). Sebanyak 667 molecular de-
-%scription akan diekstrak oleh PaDEL Description, tabel 3.1 menunjukan jenis
-%molecular description yang diekstrak
-
-%Tabel Jenis molecular description yang dapat
-%diextract oleh PaDEL Description.
-
-%ALOGP
-%APol
-%Aromatic atoms counts
-%Aromatic bonds count
-%Atom count
-%Autocorrelation (charge)
-%Autocorrelation (mass)
-%Autocorrelation (polarizability)
-%BCUT
-%Bound count
-%BPol
-%Carbon types
-%Chi chain
-%Chi cluster
-%Chi path
-%Chi path cluster
-%Eccentric connectivity index 
-%Atom type electrotopological state
-%Fragment complexity
-%Hbond acceptor count
-%Hbond donor count
-%Kappa shape indices
-%Largest chain
-%Largest Pi system
-%Longest aliphatic chain
-%Mannhold LogP
-%McGowan volume
-%Molecular distance edge
-%Molecular linear free energy relation
-%Petitjean number
-%Ring count
-%Rotatable bonds count
-%Rule of five
-%Topological polar surface area
-%Vertex adjacency information (magnitude)
-%Weight
-%Weighted path
-%Wiener numbers
-%XlogP
-%Zagreb index
-%
-%3
-%1
-%1
-%1
-%13
-%5
-%5
-%5
-%6
-%5
-%1
-%9
-%10
-%8
-%16
-%6
-%1 
-%482
-%1
-%1
-%1
-%3
-%1
-%1
-%1
-%1
-%1
-%19
-%6
-%1
-%34
-%1
-%1
-%1
-%1
-%1
-%5
-%2
-%1
-%1
-%
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-%2D
-
-%Dataset dibuat dengan mencoba melakukan simulasi docking 368 senyawa herbal indonesia dengan protein HIV-1 menggunakan PyRx \& Autodock. Senyawa yang berhasil docking diberi label positif (357 senyawa) dan yang gagal diberi label negatif (11 senyawa).
-
-%Molecular Docking
-%
-%Tahap terakhir adalah melakukan docking senyawa-senyawa yang diprediksi
-%sebagai obat oleh pengklasifikasi SVM-RFE pada langkah sebelumnya. Hal ini
-%dilakukan untuk memastikan apakah senyawa-senyawa tersebut dapat bereaksi
-%dengan target obat. Docking dilakukan menggunakan PyRx, yaitu GUI frontend
-%untuk Autodock.
-%Target yang digunakan adalah HIV-1 protease yang berasal dari PDB dengan
-%kode 3OCX. Gambar 4.6 menunjukan struktur target yang digunakan. Sebelum
-%digunakan sebagai target docking, protein target dibersikan dari molekul air
-%dan residu lainnya. Koordinat XYZ yang digunakan pada saat docking adalah
-%5.192, -4.557, 14.799, dengan ukuran gridbox 50x50x50 unit, serta evaluasi
-%energi maksimum sebesar 1,000,000.
-
-%Dataset PubChem BioAssay akan digunakan untuk melatih pengklasifikasi.
-%Akan digunakan BioAssay yang memiliki target HIV-1 protease (GI:75593047),
-%seperti AID 162030, AID 160444 dan AID 83109. BioAssay tersebut merupakan
-%hasil percobaan untuk mencari senyawa HIV-1 protease inhibitor. Hal ini di-
-%lakukan agar sejalan dengan penelitian (Yanuar, Suhartanto, Mun’im, Anugrah, & Syahdi, 2014) untuk mencari HIV-1 protease inhibitor pada tanaman obat herbal indonesia.
-
-\section{Feature Selection} \label{Feature Selection}
-
-%Wrapper Method
-%
-%Pada wrapper method, feature selection dilakukan memanfaatkan algoritma
-%machine learning sebagai black box, dengan kata lain pengetahuan bagaimana
-%cara algoritma tersebut bekerja tidak diperlukan, hanya antarmukanya saja.
-%Wrapper method memanfaatkan machine learning untuk mengevaluasi kualitas
-%dari fitur-fitur terpilih. Bagian feature selection search akan menghasilkan kumpulan fitur-fitur, dan
-%bagian feature evaluation akan memanfaatkan classifier yang dihasilkan oleh machine learning untuk mengukur performanya, yang selanjutnya digunakan
-%oleh feature selection search pada iterasi pencarian kumpulan fitur-fitur selan-
-%jutnya. Kumpulan fitur-fitur dengan peforma tertinggi akan digunakan untuk
-%menghasilkan classifier akhir. Classifier ini akan dievaluasi menggunakan data
-%set testing yang tidak digunakan pada proses learning. (Tang, Alelyani, & Liu,
-%2014)
-%
-%SVM Recursive Feature Elimination
-%
-%SVM Recursive Feature Elimination (SVM-RFE) pertama kali diajukan oleh
-%Guyon, Weston, and Barnhill, 2002 untuk memilih gen yang relevan pada
-%problem klasifikasi kanker. SVM-RFE memanfaatkan bobot pada hyperplane
-%yang dihasilkan sebagai rangking fitur. SVM-RFE terdiri dari empat langkah
-%berikut:
-%1. Melatih SVM menggunakan data set training.
-%2. Urutkan fitur berdasarkan bobot pada pengklasifikasi yang dihasilkan.
-%3. Buang fitur dengan bobot terkecil.
-%4. Ulangi proses diatas menggunakan fitur-fitur yang tersisa.
-
-
-\section{Experiments} \label{Experiments}
-
-TODO
-
-%
-%Eksperimen yang dilakukan:
-%1. Data latih dan data uji PubChem
-%2. Data latih PubChem, data uji HerbalDB
-%3. Data latih dan data uji HerbalDB
-%
-%Model yang digunakan untuk tiap eksperimen adalah
-%1. SVM
-%2. SVM + RFE
-%3. SVM + WM (GA)
-%4. (ditambah sesuai kebutuhan)
-
-%Evaluasi peforma dilakukan dengan pengukuran berikut:
-%
-%Accuracy rate = TP + TN / TP + TN + FP + FN
-%Sensitivity = TP / TP + FN
-%Specificity = TN / TN + FP
-%Precision = TP / TP + FP
-%
-%Dimana, T P = true positive, T N = true negative, F P = false positive, dan F N = false negative.
-
-
-\begin{figure}
-	\includegraphics[scale=0.5]{../images/03-evaluate-1_scores_chart.png}
-	\caption{Classification performance comparison on PubChem BioAssay + DUD-E dataset}
-	\label{fig_performance_comparison_pubchem}
-\end{figure}
-
-\begin{figure}
-	\includegraphics[scale=0.5]{../images/03-evaluate-1_roc_chart.png}
-	\caption{AUC ROC comparison on PubChem BioAssay + DUD-E dataset}
-	\label{fig_roc_comparison_pubchem}
-\end{figure}
-
-
-\begin{figure}
-\includegraphics[scale=0.5]{../images/03-evaluate-3_scores_chart.png}
-\caption{Classification performance comparison on Herbal DB dataset}
-\label{fig_performance_comparison_herbaldb}
-\end{figure}
-
-\begin{figure}
-	\includegraphics[scale=0.5]{../images/feature_selection_time_comparison.png}
-	\caption{Feature selection time comparison}
-	\label{fig_feature_selection_time_comparison}
-\end{figure}
-
-\begin{figure}
-	\includegraphics[scale=0.5]{../images/classification_time_comparison.png}
-	\caption{Classification time comparison}
-	\label{fig_classification_time_comparison}
-\end{figure}
-
-\section{Analysis}
-
-TODO
-
-Model mana yang paling akurat memprediksi hasil docking senyawa dengan HIV-1
-
-\section{Conclusion}
-
-TODO
-
-% conference papers do not normally have an appendix
-
-% use section* for acknowledgment
-%\ifCLASSOPTIONcompsoc
-  % The Computer Society usually uses the plural form
-%  \section*{Acknowledgments}
-%\else
-  % regular IEEE prefers the singular form
-%  \section*{Acknowledgment}
-%\fi
-
-\bibliographystyle{IEEEtran}
-\bibliography{../references}
-
-% that's all folks
+	After visualizing both datasets using t-Distributed Stochastic Neighbor Embedding (t-SNE) \cite{maaten2008visualizing} with 100 perplexity, it becomes clear why Linear SVM classification performance for Indonesian Herbal DB dataset is lower than performance on PubChem BioAssay + DUD-E dataset. Figure \ref{fig_tsne_herbaldb} shows that positive (green dots) and negative samples (red dots) are visually separable. While in Figure \ref{fig_tsne_herbaldb}, the negative samples are scattered among the positives. Comparison of these two figures indicates that classifying samples in Indonesian Herbal DB is more difficult than in PubChem BioAssay + DUD-E dataset. Most likely this is caused by the labeling based on manual docking.
+	
+	\section{Conclusion}
+	
+	Based on experiment results and analysis above, some conclusions are made:
+	
+	\begin{enumerate}
+		\item Feature selection using SVM Recursive Feature Elimination (SVM-RFE) and Wrapper Method (WM) able to improve Linear SVM drug target classification efficiency, but not effectiveness. Therefore, they are useful to increase efficiency of ligand-based screening (LBS).
+		\item WM using Genetic Algorithm is more suitable than SVM-RFE for molecular descriptors feature selection because it selects almost half number of features.
+		\item Indonesian Herbal DB dataset posses different characteristics than PubChem BioAssay + DUD-E dataset. Further collaboration with experts are required to improve the quality of dataset in the future.
+	\end{enumerate}
+	
+	% conference papers do not normally have an appendix
+	
+	% use section* for acknowledgment
+	%\ifCLASSOPTIONcompsoc
+	% The Computer Society usually uses the plural form
+	%  \section*{Acknowledgments}
+	%\else
+	% regular IEEE prefers the singular form
+	%  \section*{Acknowledgment}
+	%\fi
+	
+	\bibliographystyle{IEEEtran}
+	\bibliography{../references}
+	
+	% that's all folks
 \end{document}

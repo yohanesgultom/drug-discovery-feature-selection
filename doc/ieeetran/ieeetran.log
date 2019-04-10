@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.14)  25 MAR 2019 22:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.14)  10 APR 2019 16:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -621,19 +621,19 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box53
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 146.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 174.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.06374> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 146.
-LaTeX Font Info:    Calculating math sizes for size <14.05249> on input line 14
-6.
-LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 146
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 174.
+LaTeX Font Info:    Calculating math sizes for size <14.05249> on input line 17
+4.
+LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 174
 .
-LaTeX Font Info:    Calculating math sizes for size <12.045> on input line 146.
+LaTeX Font Info:    Calculating math sizes for size <12.045> on input line 174.
 
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
@@ -641,15 +641,18 @@ LaTeX Font Info:    Calculating math sizes for size <12.045> on input line 146.
 ] [2]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-<../images/wrapper_method.png, id=14, 741.77126pt x 303.1325pt>
+ [3]
+<../images/wrapper_method.png, id=17, 741.77126pt x 303.1325pt>
 File: ../images/wrapper_method.png Graphic file (type png)
 
 <use ../images/wrapper_method.png>
-Package pdftex.def Info: ../images/wrapper_method.png used on input line 247.
+Package pdftex.def Info: ../images/wrapper_method.png used on input line 275.
 (pdftex.def)             Requested size: 222.5331pt x 90.94044pt.
- [3]
-Underfull \hbox (badness 1371) in paragraph at lines 263--264
+
+Underfull \vbox (badness 1701) has occurred while \output is active []
+
+
+Underfull \hbox (badness 1371) in paragraph at lines 291--292
 []\OT1/ptm/m/n/12.045 In this re-search, Scikit-Learn im-ple-men-ta-
  []
 
@@ -657,143 +660,133 @@ Underfull \hbox (badness 1371) in paragraph at lines 263--264
 File: ../images/SVM_RFE_chart.png Graphic file (type png)
 
 <use ../images/SVM_RFE_chart.png>
-Package pdftex.def Info: ../images/SVM_RFE_chart.png used on input line 272.
+Package pdftex.def Info: ../images/SVM_RFE_chart.png used on input line 300.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
-
-<../images/WM_GA_SVM_acc_chart.png, id=20, 462.528pt x 346.896pt>
+ [4 <../images/wrapper_method.png>]
+<../images/WM_GA_SVM_acc_chart.png, id=24, 462.528pt x 346.896pt>
 File: ../images/WM_GA_SVM_acc_chart.png Graphic file (type png)
 
 <use ../images/WM_GA_SVM_acc_chart.png>
-Package pdftex.def Info: ../images/WM_GA_SVM_acc_chart.png used on input line 2
-80.
+Package pdftex.def Info: ../images/WM_GA_SVM_acc_chart.png used on input line 3
+08.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
 
-<../images/WM_GA_SVM_feat_chart.png, id=21, 462.528pt x 346.896pt>
+<../images/WM_GA_SVM_feat_chart.png, id=25, 462.528pt x 346.896pt>
 File: ../images/WM_GA_SVM_feat_chart.png Graphic file (type png)
 
 <use ../images/WM_GA_SVM_feat_chart.png>
 Package pdftex.def Info: ../images/WM_GA_SVM_feat_chart.png used on input line 
-286.
+314.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
- [4 <../images/wrapper_method.png> <../images/SVM_RFE_chart.png> <../images/WM_
-GA_SVM_acc_chart.png>]
-<../images/feature_selection_time_comparison.png, id=28, 462.528pt x 346.896pt>
+
+<../images/feature_selection_time_comparison.png, id=26, 462.528pt x 346.896pt>
 File: ../images/feature_selection_time_comparison.png Graphic file (type png)
 <use ../images/feature_selection_time_comparison.png>
 Package pdftex.def Info: ../images/feature_selection_time_comparison.png used o
-n input line 294.
+n input line 322.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
 
-Underfull \vbox (badness 1337) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-Underfull \hbox (badness 2134) in paragraph at lines 309--310
-\OT1/ptm/m/n/12.045 out fea-ture se-lec-tion is the same as SVM-
- []
-
-<../images/03-evaluate-1_roc_chart.png, id=29, 462.528pt x 346.896pt>
+ [5 <../images/SVM_RFE_chart.png> <../images/WM_GA_SVM_acc_chart.png> <../image
+s/WM_GA_SVM_feat_chart.png> <../images/feature_selection_time_comparison.png>]
+<../images/03-evaluate-1_roc_chart.png, id=34, 462.528pt x 346.896pt>
 File: ../images/03-evaluate-1_roc_chart.png Graphic file (type png)
 
 <use ../images/03-evaluate-1_roc_chart.png>
 Package pdftex.def Info: ../images/03-evaluate-1_roc_chart.png used on input li
-ne 312.
+ne 340.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
 
-<../images/03-evaluate-1_scores_chart.png, id=30, 462.528pt x 346.896pt>
+<../images/03-evaluate-1_scores_chart.png, id=35, 462.528pt x 346.896pt>
 File: ../images/03-evaluate-1_scores_chart.png Graphic file (type png)
 
 <use ../images/03-evaluate-1_scores_chart.png>
 Package pdftex.def Info: ../images/03-evaluate-1_scores_chart.png used on input
- line 318.
+ line 346.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
- [5 <../images/WM_GA_SVM_feat_chart.png> <../images/feature_selection_time_comp
-arison.png> <../images/03-evaluate-1_roc_chart.png>]
-<../images/03-evaluate-3_roc_chart.png, id=39, 462.528pt x 346.896pt>
+
+<../images/03-evaluate-3_roc_chart.png, id=36, 462.528pt x 346.896pt>
 File: ../images/03-evaluate-3_roc_chart.png Graphic file (type png)
 
 <use ../images/03-evaluate-3_roc_chart.png>
 Package pdftex.def Info: ../images/03-evaluate-3_roc_chart.png used on input li
-ne 326.
+ne 354.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
 
-<../images/03-evaluate-3_scores_chart.png, id=40, 462.528pt x 346.896pt>
+<../images/03-evaluate-3_scores_chart.png, id=37, 462.528pt x 346.896pt>
 File: ../images/03-evaluate-3_scores_chart.png Graphic file (type png)
 
 <use ../images/03-evaluate-3_scores_chart.png>
 Package pdftex.def Info: ../images/03-evaluate-3_scores_chart.png used on input
- line 332.
+ line 360.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
-
-<../images/03-evaluate-4_roc_chart.png, id=41, 462.528pt x 346.896pt>
+ [6 <../images/03-evaluate-1_roc_chart.png> <../images/03-evaluate-1_scores_cha
+rt.png> <../images/03-evaluate-3_roc_chart.png>]
+<../images/03-evaluate-4_roc_chart.png, id=46, 462.528pt x 346.896pt>
 File: ../images/03-evaluate-4_roc_chart.png Graphic file (type png)
 
 <use ../images/03-evaluate-4_roc_chart.png>
 Package pdftex.def Info: ../images/03-evaluate-4_roc_chart.png used on input li
-ne 340.
+ne 368.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
 
-<../images/03-evaluate-4_scores_chart.png, id=42, 462.528pt x 346.896pt>
+<../images/03-evaluate-4_scores_chart.png, id=47, 462.528pt x 346.896pt>
 File: ../images/03-evaluate-4_scores_chart.png Graphic file (type png)
 
 <use ../images/03-evaluate-4_scores_chart.png>
 Package pdftex.def Info: ../images/03-evaluate-4_scores_chart.png used on input
- line 346.
+ line 374.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
 
-<../images/classification_time_comparison.png, id=43, 462.528pt x 346.896pt>
+<../images/classification_time_comparison.png, id=48, 462.528pt x 346.896pt>
 File: ../images/classification_time_comparison.png Graphic file (type png)
 
 <use ../images/classification_time_comparison.png>
 Package pdftex.def Info: ../images/classification_time_comparison.png used on i
-nput line 354.
+nput line 382.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
- [6 <../images/03-evaluate-1_scores_chart.png> <../images/03-evaluate-3_roc_cha
-rt.png> <../images/03-evaluate-3_scores_chart.png> <../images/03-evaluate-4_roc
-_chart.png>]
-<../images/visualize-dataset_tsne_pubchem_100.png, id=51, 462.528pt x 346.896pt
+
+<../images/visualize-dataset_tsne_pubchem_100.png, id=49, 462.528pt x 346.896pt
 >
 File: ../images/visualize-dataset_tsne_pubchem_100.png Graphic file (type png)
  <use ../images/visualize-dataset_tsne_pubchem_100.png>
 Package pdftex.def Info: ../images/visualize-dataset_tsne_pubchem_100.png used 
-on input line 366.
+on input line 394.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
 
-<../images/visualize-dataset_tsne_herbaldb_expanded_100.png, id=52, 462.528pt x
+<../images/visualize-dataset_tsne_herbaldb_expanded_100.png, id=50, 462.528pt x
  346.896pt>
 File: ../images/visualize-dataset_tsne_herbaldb_expanded_100.png Graphic file (
 type png)
  <use ../images/visualize-dataset_tsne_herbaldb_expanded_100.png>
 Package pdftex.def Info: ../images/visualize-dataset_tsne_herbaldb_expanded_100
-.png used on input line 372.
+.png used on input line 400.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
 
-Underfull \hbox (badness 5077) in paragraph at lines 377--378
+Underfull \hbox (badness 5077) in paragraph at lines 405--406
 []\OT1/ptm/m/n/12.045 After vi-su-al-iz-ing both datasets us-ing t-
  []
 
 
-Underfull \hbox (badness 1527) in paragraph at lines 377--378
+Underfull \hbox (badness 1527) in paragraph at lines 405--406
 \OT1/ptm/m/n/12.045 In-done-sian Herbal DB dataset is lower than
  []
 
-
-Underfull \hbox (badness 1365) in paragraph at lines 381--382
-[]\OT1/ptm/m/n/12.045 Based on ex-per-i-ment re-sults and anal-y-sis
- []
-
-[7 <../images/03-evaluate-4_scores_chart.png> <../images/classification_time_co
-mparison.png> <../images/visualize-dataset_tsne_pubchem_100.png> <../images/vis
-ualize-dataset_tsne_herbaldb_expanded_100.png>]
-Underfull \hbox (badness 2384) in paragraph at lines 384--385
+[7 <../images/03-evaluate-3_scores_chart.png> <../images/03-evaluate-4_roc_char
+t.png> <../images/03-evaluate-4_scores_chart.png> <../images/classification_tim
+e_comparison.png>]
+Underfull \hbox (badness 2384) in paragraph at lines 412--413
 []\OT1/ptm/m/n/12.045 Feature se-lec-tion us-ing SVM Re-cur-
  []
 
 
-Underfull \hbox (badness 1354) in paragraph at lines 386--387
+Underfull \hbox (badness 1354) in paragraph at lines 414--415
 []\OT1/ptm/m/n/12.045 Indonesian Herbal DB dataset posses
  []
 
-(./ieeetran.bbl
+(./ieeetran.bbl [8 <../images/visualize-dataset_tsne_pubchem_100.png> <../image
+s/visualize-dataset_tsne_herbaldb_expanded_100.png>]
 Underfull \hbox (badness 1635) in paragraph at lines 83--87
 \OT1/ptm/m/n/9.03374 and three di-men-sional struc-ture of the chem-i-cal com-
  []
@@ -815,27 +808,29 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[8] (./ieeetran.aux) ) 
+[9
+
+] (./ieeetran.aux) ) 
 Here is how much of TeX's memory you used:
  12590 strings out of 494953
  233711 string characters out of 6180976
- 378736 words of memory out of 5000000
+ 374736 words of memory out of 5000000
  15717 multiletter control sequences out of 15000+600000
  51866 words of font info for 116 fonts, out of 8000000 for 9000
  17 hyphenation exceptions out of 8191
  40i,14n,42p,10415b,365s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.en
-c}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
-times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.p
-fb>
-Output written on ieeetran.pdf (8 pages, 532953 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/font
+s/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ti
+mes/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb
+>
+Output written on ieeetran.pdf (9 pages, 565430 bytes).
 PDF statistics:
- 89 PDF objects out of 1000 (max. 8388607)
- 43 compressed objects within 1 object stream
+ 92 PDF objects out of 1000 (max. 8388607)
+ 45 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  71 words of extra memory for PDF output out of 10000 (max. 10000000)
 

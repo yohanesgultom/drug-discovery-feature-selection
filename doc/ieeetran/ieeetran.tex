@@ -302,7 +302,7 @@
 		\label{fig_svmrfe_acc_num_features_chart}
 	\end{figure}
 	
-	The wrapper method, which uses Genetic Algorithm with 100 generations and 20 population per generation as selection algorithm, chooses only 249 features achieving maximum Linear SVM accuracy of 0.9916. There are 244 features in common with the result from SVM-RFE. The chart in Figure \ref{fig_wm_acc_chart} shows that even from the first generation, the average accuracy has achieved > 0.9. While Figure \ref{fig_wm_num_features_chart} shows that every best candidate in each generation use between 240-265 features.
+	The wrapper method, which uses Genetic Algorithm with 100 generations and 20 population per generation as a selection algorithm, chooses only 249 features achieving maximum Linear SVM accuracy of 0.9916. There are 244 features in common with the result from SVM-RFE. The chart in Figure \ref{fig_wm_acc_chart} shows that even from the first generation, the average accuracy has achieved > 0.9. While Figure \ref{fig_wm_num_features_chart} shows that every best candidate in each generation use between 240-265 features.
 		
 	\begin{figure}
 		\includegraphics[scale=0.5]{../images/WM_GA_SVM_acc_chart.png}
@@ -388,7 +388,7 @@
 
 	The experiments show that SVM-RFE and WM feature selections don't improve the performance of Linear SVM classifier for both datasets. But since there is no significant decrease in performance, they are still useful to improve efficiency by reducing the number of features processed and ultimately the whole classification time by 25\%-50\%.
 	
-	Compared to SVM-RFE, WM with Genetic Algorithm requires twice longer time to select features. Despite of that, WM manages to choose half of the SVM-RFE features. Since feature selection process is only need to be done once and classification process is done multiple times, WM achieves better efficiency than SVM-RFE without sacrificing significant classification performance.
+	Compared to SVM-RFE, WM with Genetic Algorithm requires twice longer time to select features. Despite that, WM manages to choose half of the SVM-RFE features. Since the feature selection process only needs to be done once and the classification process is done multiple times, WM achieves better efficiency than SVM-RFE without sacrificing significant classification performance.
 		
 	\begin{figure}
 		\includegraphics[scale=0.5]{../images/visualize-dataset_tsne_pubchem_100.png}
@@ -409,9 +409,9 @@
 	Based on experimental results and analysis above, some conclusions are made:
 	
 	\begin{enumerate}
-		\item Feature selection using SVM Recursive Feature Elimination (SVM-RFE) and Wrapper Method (WM) able to improve Linear SVM drug target classification efficiency, but not effectiveness. Therefore, they are useful to increase efficiency of ligand-based screening (LBS).
-		\item WM using Genetic Algorithm is more suitable than SVM-RFE for molecular descriptors feature selection because it selects almost half number of features.
-		\item Indonesian Herbal DB dataset posses different characteristics than PubChem BioAssay + DUD-E dataset. Further collaboration with experts are required to improve the quality of dataset in the future.
+		\item Feature selection using SVM Recursive Feature Elimination (SVM-RFE) and Wrapper Method (WM) able to improve the Linear SVM drug target classification efficiency, but not effectiveness. Therefore, they are useful to increase the efficiency of ligand-based screening (LBS).
+		\item WM using Genetic Algorithm is more suitable than SVM-RFE for molecular descriptors feature selection because it selects almost half the number of features.
+		\item Indonesian Herbal DB dataset posses different characteristics than PubChem BioAssay + DUD-E dataset. Further collaboration with experts is required to improve the quality of the dataset in the future.
 	\end{enumerate}
 	
 	% conference papers do not normally have an appendix

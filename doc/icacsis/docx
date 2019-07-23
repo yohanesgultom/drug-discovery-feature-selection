@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "converting to docx.."
+pandoc -f latex -t docx -o $2 --bibliography ../references.bib $1
+

@@ -1,6 +1,7 @@
 .vscode/
 software/
 virtualenv/
+venv/
 code/*.json
 code/*.png
 code/*.pkl

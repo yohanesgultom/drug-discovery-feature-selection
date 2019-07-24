@@ -23,7 +23,7 @@ evaluate(
     '../dataset/dataset_test_expanded.csv', # herbal db manual docking
     '03-evaluate-4_result.csv',
     '03-evaluate-4_roc_chart.png',
-    'ROC on Herbal DB Dataset manual docking',
+    'AUC-ROC on Herbal DB Dataset manual docking',
     'As both train and test data',
     '03-evaluate-4_scores_chart.png',
     'Performance Comparison on Herbal DB manual docking',

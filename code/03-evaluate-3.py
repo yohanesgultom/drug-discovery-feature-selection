@@ -24,7 +24,7 @@ evaluate2(
     '../dataset/dataset_test_expanded.csv', # herbal db manual docking
     '03-evaluate-3_result.csv',
     '03-evaluate-3_roc_chart.png',
-    'ROC on Herbal DB Dataset manual docking',
+    'AUC-ROC on Herbal DB Dataset manual docking',
     'PubChem BioAssay + DUD-E as training data',
     '03-evaluate-3_scores_chart.png',
     'Performance Comparison on Herbal DB manual docking',

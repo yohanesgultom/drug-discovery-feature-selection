@@ -25,7 +25,7 @@ evaluate2(
     '../dataset/dataset_test.csv',  # top 10 herbaldb
     '03-evaluate-2_result.csv',
     '03-evaluate-2_roc_chart.png',
-    'ROC on Herbal DB Dataset top 10',
+    'AUC-ROC on Herbal DB Dataset top 10',
     'PubChem BioAssay + DUD-E as training data',
     '03-evaluate-2_scores_chart.png',
     'Performance Comparison on Herbal DB top 10',

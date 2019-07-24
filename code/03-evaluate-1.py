@@ -24,7 +24,7 @@ evaluate(
     '../dataset/dataset.csv',
     '03-evaluate-1_result.csv',
     '03-evaluate-1_roc_chart.png',
-    'ROC on ROC on PubChem BioAssay + DUD-E',
+    'AUC-ROC Comparison on PubChem BioAssay + DUD-E',
     'As both train and test data',
     '03-evaluate-1_scores_chart.png',
     'Performance Comparison on ROC on PubChem BioAssay + DUD-E',

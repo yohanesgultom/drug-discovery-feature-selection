@@ -125,11 +125,12 @@ def evaluate(dataset_file, result_file, roc_chart_file, roc_suptitle, roc_title,
             matplotlib.use('Agg')
 
         # plot ROC
-        colors = ['orange', 'blue', 'red']
+        colors = ['green', 'blue', 'red']
+        markers = ['s', '^', 'x']
         plt.figure()
         handles = []
         for i, row in enumerate(results):
-            h, = plt.plot(row['mean_fpr'], row['mean_tpr'], color=colors[i], label=r'Mean ROC {} (AUC = {:.4f} $\pm$ {:.4f})'.format(row['name'], row['mean_auc'], row['std_auc']), lw=2, alpha=.8)
+            h, = plt.plot(row['mean_fpr'], row['mean_tpr'], color=colors[i], marker=markers[i], label=r'Mean ROC {} (AUC = {:.4f} $\pm$ {:.4f})'.format(row['name'], row['mean_auc'], row['std_auc']), lw=2, alpha=.8)
             handles.append(h)
         plt.xlim([-0.05, 1.05])
         plt.ylim([-0.05, 1.05])
@@ -248,10 +249,11 @@ def evaluate2(train_file, test_file, result_file, roc_chart_file, roc_suptitle, 
 
         # plot ROC
         colors = ['orange', 'blue', 'red']
+        markers = ['s', '^', 'x']
         plt.figure()
         handles = []
         for i, row in enumerate(results):
-            h, = plt.plot(row['fpr'], row['tpr'], color=colors[i], label=r'ROC {} (AUC = {:.4f})'.format(row['name'], row['roc_auc']), lw=2, alpha=.8)
+            h, = plt.plot(row['fpr'], row['tpr'], color=colors[i], marker=markers[i], label=r'ROC {} (AUC = {:.4f})'.format(row['name'], row['roc_auc']), lw=2, alpha=.8)
             handles.append(h)
         plt.xlim([-0.05, 1.05])
         plt.ylim([-0.05, 1.05])

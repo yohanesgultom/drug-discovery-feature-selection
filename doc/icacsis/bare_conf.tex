@@ -71,37 +71,37 @@
 % use a multiple column layout for up to three different
 % affiliations
 
-\author{
-	\IEEEauthorblockN{Rahman Pujianto}
-	\IEEEauthorblockA{Faculty of Computer Science\\
-	Universitas Indonesia\\
-	Email: rahman.pujianto@ui.ac.id\\}
-	\and
-	\IEEEauthorblockN{Heru Suhartanto}
-	\IEEEauthorblockA{Faculty of Computer Science\\
-	Universitas Indonesia\\
-	Email: heru@cs.ui.ac.id\\}
-}
-
-\author{
-	\IEEEauthorblockN{
-		Rahman Pujianto\IEEEauthorrefmark{1},
-		Yohanes Gultom\IEEEauthorrefmark{1},
-		Ari Wibisono\IEEEauthorrefmark{1},
-		Arry Yanuar\IEEEauthorrefmark{2},			
-		Heru Suhartanto\IEEEauthorrefmark{1}
-	}\\
-	
-	\IEEEauthorblockA{
-		\IEEEauthorrefmark{1}Faculty of Computer Science, Universitas Indonesia\\
-		rahman.pujianto@ui.ac.id, yohanes.gultom@ui.ac.id, ari.w@cs.ui.ac.id, heru@cs.ui.ac.id
-	}\\
-	
-	\IEEEauthorblockA{
-		\IEEEauthorrefmark{2}Department of Pharmacy, Faculty of Mathematics and Natural Sciences, Universitas Indonesia\\
-		arry.yanuar@ui.ac.id
-	}
-}
+%\author{
+%	\IEEEauthorblockN{Rahman Pujianto}
+%	\IEEEauthorblockA{Faculty of Computer Science\\
+%	Universitas Indonesia\\
+%	Email: rahman.pujianto@ui.ac.id\\}
+%	\and
+%	\IEEEauthorblockN{Heru Suhartanto}
+%	\IEEEauthorblockA{Faculty of Computer Science\\
+%	Universitas Indonesia\\
+%	Email: heru@cs.ui.ac.id\\}
+%}
+%
+%\author{
+%	\IEEEauthorblockN{
+%		Rahman Pujianto\IEEEauthorrefmark{1},
+%		Yohanes Gultom\IEEEauthorrefmark{1},
+%		Ari Wibisono\IEEEauthorrefmark{1},
+%		Arry Yanuar\IEEEauthorrefmark{2},			
+%		Heru Suhartanto\IEEEauthorrefmark{1}
+%	}\\
+%	
+%	\IEEEauthorblockA{
+%		\IEEEauthorrefmark{1}Faculty of Computer Science, Universitas Indonesia\\
+%		rahman.pujianto@ui.ac.id, yohanes.gultom@ui.ac.id, ari.w@cs.ui.ac.id, heru@cs.ui.ac.id
+%	}\\
+%	
+%	\IEEEauthorblockA{
+%		\IEEEauthorrefmark{2}Faculty of Pharmacy, Universitas Indonesia\\
+%		arry.yanuar@ui.ac.id
+%	}
+%}
 
 % make the title area
 \maketitle
@@ -122,7 +122,7 @@ The evolution of viruses can make them resistant to existing drugs. One of the m
 
 To discover new drugs, first, one needs to find a set of chemical compound candidates by observing the reaction to drug target in the lab. This process is usually called high-throughput screening (HTS). Despite its importance, this process is considered inefficient and expensive because most of the chemical compounds consumed in the experiments. One way to make this process more efficient is by reducing the number of compounds that need to be tested in the lab by performing virtual screening beforehand \cite{chen2017developing}. By having the number of lab experiments reduced, ultimately it will reduce the overall time and cost needed in drug discovery \cite{korkmaz2014drug}.
 
-Virtual screening applies computer algorithms to find chemical compounds that have a high probability of reaction to the drug's target. One of its approaches is Ligand-Based Screening (LBS), where new candidates are chosen based on their structural or characteristic similarity to known drug's chemical compounds. This implies that the LBS approach relies on previous drug discovery results, which usually obtained using HTS such as PubChem BioAssay \cite{bioassay2014update}, CHEMBL \cite{bento2014chembl}, PubChem Compound \cite{kim2015pubchem} and ZINC \cite{irwin2012zinc}.
+Virtual screening applies computer algorithms to find chemical compounds that have a high probability of reaction to the drug's target. One of its approaches is Ligand-Based Screening (LBS), where new candidates are chosen based on their structural or characteristic similarity to known drug's chemical compounds. This implies that the LBS approach relies on previous drug discovery results, which usually obtained using HTVS (High Throughput Virtual Sreening) such as PubChem BioAssay \cite{bioassay2014update}, CHEMBL \cite{bento2014chembl}, PubChem Compound \cite{kim2015pubchem} and ZINC \cite{irwin2012zinc}.
 
 Since LBS is also a pattern matching problem, supervised learning algorithms can be used to classify chemical compounds using a database of known drug descriptions as a training dataset. The number of features required to describe each compound also affects the performance of both supervised and unsupervised learning algorithms. This phenomenon is usually addressed as the curse of dimensionality \cite{janecek2008relationship}. Two techniques commonly applied to solve this phenomenon are feature extraction and feature selection. While the first one extracts or processes existing features to get a set of new ones, the last one selects a subset of features from the existing ones. This work focuses on observing the performance of two feature selection methods, SVM Recursive Feature Elimination (SVM-RFE) and Wrapper Method (WM), to select a subset of features from Indonesian herbal chemical compounds that react to HIV-1 protease.
 
@@ -194,7 +194,7 @@ The first dataset consists of 7,330 samples: 3,665 compounds labeled as positive
 	\end{tabular} 
 \end{table}	
 
-Our primary dataset is made of molecular descriptors from Indonesian Herbal DB which is produced by Faculty of Pharmacy Department, Universitas Indonesia (FMIPA UI) \cite{yanuar2011medicinal}. The descriptors are also extracted from the original Molfile (MOL2) with Padel Descriptor using the same configuration as the first dataset to obtain the same set of descriptors. Since Indonesian Herbal DB is just a collection of chemical compounds 3D structural data, docking simulations with HIV-1 need to be done in order to know which of them are positive and negative samples. Docking simulation with Autodock is done for 368 compounds from Indonesian Herbal DB against HIV-1 protein from Protein Data Bank (PDB) where 357 are positive and 11 negatives. The XYZ coordinate used in the docking simulation is 5.192, -4.557, 14.799, the dimension of the grid box is a 50x50x50 unit, and maximum energy evaluation is set to 1,000,000.
+Our primary dataset is made of molecular descriptors from Indonesian Herbal DB which is produced by Faculty of Pharmacy, Universitas Indonesia \cite{yanuar2011medicinal}. The descriptors are also extracted from the original Molfile (MOL2) with Padel Descriptor using the same configuration as the first dataset to obtain the same set of descriptors. Since Indonesian Herbal DB is just a collection of chemical compounds 3D structural data, docking simulations with HIV-1 need to be done in order to know which of them are positive and negative samples. Docking simulation with Autodock is done for 368 compounds from Indonesian Herbal DB against HIV-1 protein from Protein Data Bank (PDB) where 357 are positive and 11 negatives. The XYZ coordinate used in the docking simulation is 5.192, -4.557, 14.799, the dimension of the grid box is a 50x50x50 unit, and maximum energy evaluation is set to 1,000,000.
 
 \section{Feature Selection} \label{Feature Selection}
 
@@ -342,7 +342,7 @@ After visualizing both datasets using t-Distributed Stochastic Neighbor Embeddin
 Based on experimental results and analysis above, some conclusions are made:
 
 \begin{enumerate}
-	\item Feature selection using SVM Recursive Feature Elimination (SVM-RFE) and Wrapper Method (WM) able to improve the Linear SVM drug target classification efficiency, but not effectiveness. Therefore, they are useful to increase the efficiency of ligand-based screening (LBS).
+	\item Feature selection using SVM Recursive Feature Elimination (SVM-RFE) and Wrapper Method (WM) able to improve the Linear SVM drug target classification efficiency, but not effectiveness. Therefore, they are useful to increase the efficiency of Ligand-Based Screening (LBS).
 	\item WM using Genetic Algorithm is more suitable than SVM-RFE for molecular descriptors feature selection because it selects almost half the number of features.
 	\item Indonesian Herbal DB dataset possess different characteristics than PubChem BioAssay + DUD-E dataset. Further collaboration with experts is required to improve the quality of the dataset in the future.
 \end{enumerate}

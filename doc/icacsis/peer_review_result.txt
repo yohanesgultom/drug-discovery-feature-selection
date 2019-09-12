@@ -1,0 +1,48 @@
+# Reviewer B
+
+1. The work has to be motivated better. Why do you need feature selection at all? Is the current docking prediction method slow? Still related to my point above: What is the trade off between feature selection time + docking prediction time vs. vanilla docking prediction time (without feature selection)?
+
+>> motivasi utamanya adalah efisiensi waktu prediksi/klasifikasi (25-50% lebih singkat). Penegasan ditambahkan di baris terakhir paragraf ke-2 section Analysis
+
+2. Why do you differentiate the feature selection and evaluation datasets?
+
+>> tidak dibedakan tapi dataset Herbal hanya dipakai di evaluation (classfication) karena lebih kecil dan dianggap terwakili oleh dataset PubChem. Sedangkan dataset PubChem dipakai di keduanya (feature selection and classification). Penegasan ditambahkan di baris terakhir paragraf ke-1 section Experiment
+
+3. It seems that the reduced number of features is still quite a lot (hundreds). Any thoughts on this?
+
+>> Metode terbaik (WM) berhasil mengurangi lebih dari setengah fitur (dari 667 menjadi 249). Penegasan ditambahkan di kesimpulan poin ke-3
+
+4. Why is there no improvement on precision?
+
+>> karena SVM sendiri sudah mampu mempelajari model dengan mengabaikan fitur-fitur yang kurang penting (sekalipun jadi lebih lambat). Penegasan ditambahkan di kalimat ke-2, paragraf ke-1, section Analysis
+
+5. Please provide more information and example as to what docking means.
+
+>> ditambahkan penjelasan pada paragraf 3 section Introduction
+
+6. Out of many feature selection methods, why do you choose RFE and WM?
+
+>> karena merupakan metode yang menggunakan SVM sebagai basisnya. Penjelasan ditambahkan di paragraf terakhir section Introduction
+
+7. Fig. 7 and 11 are hard to read as the values are similar.
+
+>> Fig. 7 sudah di-zoom. Fig-11 tidak bisa di-zoom karena ada nilai yang terlalu senjang
+
+8. I think the authors should provide a good argument how feature selection may or may not help the time performance in the short run and in the long run of performing docking prediction, as there is the overhead in performing feature selection anyways.
+
+>> argumennya adalah waktu feature selection hanya dilakukan sekali sedangkan klasifikasi dilakukan berkali-kali sehingga lebih efisen untuk jangka panjang. Penegasan ditambahkan di kesimpulan poin ke-2
+
+
+# Reviewer C
+
+1. From the methodology point of view, the proposed feature selection is not a new method. It is proposed in previous research [15][16][17]. The authors also did not propose any improvement / modification of the feature selection methods. Therefore, from the methodology of the paper is weak.
+
+>> tidak ada yang bisa diperbaiki tanpa mengubah metodologi
+
+2. Figure 12 shows that the feature selection methods reduce the classification time by 25-60%. The standard SVM consumes 14 s while the proposed methods consume 10 s or less. However, fig. 5 shows that the feature selection itself take more than 400 s. If we compare all process from input data to classification result, the proposed methods take far more time consumption than the original SVM without feature selection. So, I don’t agree that the proposed methods have more efficient time consumption.
+
+>> argumennya adalah waktu feature selection hanya dilakukan sekali sedangkan klasifikasi dilakukan berkali-kali sehingga lebih efisen untuk jangka panjang. Penegasan ditambahkan di kesimpulan poin ke-2
+
+3. From writing point of view, the paper is well presented following template format. The flow of the paper is easy to follow. The paper also has sufficient literature review.
+
+>> Tidak ada yang perlu diperbaiki

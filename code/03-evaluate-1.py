@@ -28,7 +28,8 @@ evaluate(
     'As both train and test data',
     '03-evaluate-1_scores_chart.png',
     'Performance Comparison on ROC on PubChem BioAssay + DUD-E',
-    'As training and testing data'
+    'As training and testing data',
+    scores_ylim=(0.98, 1.00)
 )
 
 # show plots

@@ -31,7 +31,7 @@ METHODS = [
     {'name': 'SVM', 'filename': None},
 ]
 
-def evaluate(dataset_file, result_file, roc_chart_file, roc_suptitle, roc_title, scores_chart_file, scores_chart_suptitle, scores_chart_title, methods=METHODS, verbosity=0):
+def evaluate(dataset_file, result_file, roc_chart_file, roc_suptitle, roc_title, scores_chart_file, scores_chart_suptitle, scores_chart_title, methods=METHODS, scores_ylim=(0.4, 1.0), verbosity=0):
     # read dataset
     df = pandas.read_csv(dataset_file, index_col=0)
 
@@ -152,7 +152,7 @@ def evaluate(dataset_file, result_file, roc_chart_file, roc_suptitle, roc_title,
             data = [row['mean_acc'], row['mean_sens'], row['mean_prec'], row['mean_spec']]
             plt.bar(index + (bar_width * i), data, bar_width, color=colors[i], label=row['name'])
         # plt.yticks(np.arange(0.950, 1.000, 0.005))
-        plt.ylim([0.4, 1.0])
+        plt.ylim(scores_ylim)
         plt.ylabel('Scores')
         plt.suptitle(scores_chart_suptitle)
         plt.title(scores_chart_title, fontdict={'fontsize': 9})
